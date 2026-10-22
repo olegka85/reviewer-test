@@ -1,0 +1,16 @@
+# REVIEWER DEMO ONLY: intentionally overprivileged and unpinned.
+# Manual trigger ONLY. No downloaded scripts or PR code execution.
+name: Reviewer demo - insecure CI configuration
+
+on:
+  workflow_dispatch:
+
+permissions: write-all # BUG: least-privilege violation
+
+jobs:
+  demonstration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # BUG: action not pinned to full SHA
+      - name: Demonstrate safe manual step
+        run: echo "No untrusted code is executed by this workflow"
